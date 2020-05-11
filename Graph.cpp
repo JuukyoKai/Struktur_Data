@@ -57,13 +57,6 @@ class Graph{
 			if(isEmpty()){
 				//exchange default root
 				root=tempVert;
-				/*
-				root -> setConnectedVertex(tempVert);
-				cout << "test";
-				tempVert -> setConnectedVertex(root);
-				cout << "test";
-				root=tempVert;
-				*/
 				cout << "Adding root : " << key << endl;
 			}else {
 				cout << "Adding Vertex : " << key << endl;
@@ -84,8 +77,6 @@ class Graph{
 			vertexPtrArr[indexFrom]->setConnectedVertex(vertexPtrArr[indexTo]);
 			vertexPtrArr[indexTo]->setConnectedEdge(tempEdge);
 			vertexPtrArr[indexTo]->setConnectedVertex(vertexPtrArr[indexFrom]);
-			
-			//cout << vertexPtrArr[indexFrom] << endl;
 		}
 		void addEdge(int fromVert, int toVert, int weight){
 			//make temporary object
@@ -98,8 +89,6 @@ class Graph{
 			vertexPtrArr[indexFrom]->setConnectedVertex(vertexPtrArr[indexTo]);
 			vertexPtrArr[indexTo]->setConnectedEdge(tempEdge);
 			vertexPtrArr[indexTo]->setConnectedVertex(vertexPtrArr[indexFrom]);
-			
-			//cout << vertexPtrArr[indexFrom] << endl;
 		}
 		nodeVertex* getVertex(int vertKey){
 			cout << "Getting Vertex ...." << endl;
@@ -119,7 +108,6 @@ class Graph{
         	cout << "\n" << endl;
 		}
 		void inGraph(int vertKey){
-			//cout << *(vertexArr.end()) << " : " << *cariIndex(vertKey);
 			if(cariIndex(vertKey) != vertexArr.end()){
 				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Ditemukan" << endl;
 			} else {
