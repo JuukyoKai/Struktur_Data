@@ -27,12 +27,14 @@ class Graph{
 		}
 		
 		/*            Basic Function              */
+		//ensure that graph is Empty
 		bool isEmpty(){
 			if(vertexArr.size()==1){
 				return true;
 			}
 			else return false;
 		}
+		//ensure that graph has a minimum of 2 vertices
 		bool isValid(){
 			if(vertexArr.size()>=3){
 				return true;
@@ -40,6 +42,7 @@ class Graph{
 			else return false;
 		}
 		vector<int>::iterator cariIndex(int key){
+			//Searching for designated key in recorded data of vertices (vertexArr)
 			vector<int> vkey;
 			vkey.push_back(key);
 			vector<int>::iterator it=std::search(vertexArr.begin(), vertexArr.end(), vkey.begin(), vkey.end());
@@ -75,7 +78,7 @@ class Graph{
 			//search and save index vertex
 			int indexFrom = std::distance(vertexArr.begin(), cariIndex(fromVert));
 			int indexTo = std::distance(vertexArr.begin(), cariIndex(toVert));
-			//connecting between vertexes
+			//connecting between vertices
 			vertexPtrArr[indexFrom]->setConnectedEdge(tempEdge);
 			vertexPtrArr[indexFrom]->setConnectedVertex(vertexPtrArr[indexTo]);
 			vertexPtrArr[indexTo]->setConnectedEdge(tempEdge);
@@ -89,7 +92,7 @@ class Graph{
 			//search and save index vertex
 			int indexFrom = std::distance(vertexArr.begin(), cariIndex(fromVert));
 			int indexTo = std::distance(vertexArr.begin(), cariIndex(toVert));
-			//connecting between vertexes
+			//connecting between vertices
 			vertexPtrArr[indexFrom]->setConnectedEdge(tempEdge);
 			vertexPtrArr[indexFrom]->setConnectedVertex(vertexPtrArr[indexTo]);
 			vertexPtrArr[indexTo]->setConnectedEdge(tempEdge);
@@ -100,10 +103,10 @@ class Graph{
 		nodeVertex* getVertex(int vertKey){
 			cout << "Getting Vertex ...." << endl;
 			if(cariIndex(vertKey) != vertexArr.end()){
-				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Ditemukan" << endl;
+				cout << " Status : Ditemukan" << endl;
 				return vertexPtrArr[std::distance(vertexArr.begin(), cariIndex(vertKey))];
 			} else {
-				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Tidak Ditemukan" << endl;	
+				cout << " Status : Tidak Ditemukan" << endl;	
 			}
 		}
 		
@@ -151,16 +154,23 @@ class Graph{
 
 int main(int argc, char** argv) {
 	Graph myGraph;
+	cout << "Add Vertex : " << endl;
 	myGraph.addVertex(1);
 	myGraph.addVertex(2);
 	myGraph.addVertex(3);
-	myGraph.test(1);
-	myGraph.test(2);
+	myGraph.addVertex(4);
+	cout << "\n\n Add Edge : " << endl;
 	myGraph.addEdge(1,2);
 	myGraph.addEdge(1,3);
+	myGraph.addEdge(2,3);
+	myGraph.addEdge(3,4);
+	cout << "\n\n Get Vertex : " << endl;
 	cout << "Vertex : " << myGraph.getVertex(3)->getName() << " Alamat : " << myGraph.getVertex(3) << endl;
+	cout << "\n\n Get Vertices : " << endl;
 	myGraph.getVertices();
+	cout << "\n\n inGraph : " << endl;
 	myGraph.inGraph(4);
+	cout << "\n\n Adjacency List : " << endl;
 	myGraph.printAdjList();
 	
 	return 0;
