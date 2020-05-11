@@ -114,13 +114,6 @@ class Graph{
         	} 
         	cout << "\n" << endl;
 		}
-		
-		void test(int t){
-			int indexTest = std::distance(vertexArr.begin(), cariIndex(t));
-			nodeVertex *tempVert = new nodeVertex(t);
-			cout << "Node : " << t << " Index : " << "-" << " Ptr : "<< tempVert << endl;
-			cout << "Node : " << t << " Index : " << indexTest << " Ptr : "<< vertexPtrArr[indexTest] << endl;
-		}
 		void inGraph(int vertKey){
 			//cout << *(vertexArr.end()) << " : " << *cariIndex(vertKey);
 			if(cariIndex(vertKey) != vertexArr.end()){
@@ -129,16 +122,28 @@ class Graph{
 				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Tidak Ditemukan" << endl;	
 			}
 		}
-		void adjList(int ){
-			
+		/* --------------- NPM Modules 1 ---------------*/ 
+		//Adjacency List
+		void adjList(nodeVertex* node){
+			vector<nodeVertex*>::iterator j;
+			vector<nodeVertex*> tempArr = node->getConnectedVertex();
+			for (j=tempArr.begin()+1; j != tempArr.end(); j++) { 
+				cout << "-> " << (*j)->getName(); 
+        	}
 		}
 		void printAdjList(){
-			vector<int>::iterator it;
-			for (it = vertexArr.begin()+1; it != vertexArr.end(); it++) { 
-				cout << "\n Adjacency list of vertex " << (it-vertexArr.begin()) << "\n head "; 
-           		cout << *it << ' '; 
+			vector<nodeVertex*>::iterator i;
+			for (i = vertexPtrArr.begin()+1; i != vertexPtrArr.end(); i++) { 
+				cout << "\n Adjacency list of vertex " << (*i)->getName() << "\n head "; 
+				adjList(*i);
         	} 
         	cout << "\n" << endl;
+		}
+		void test(int t){
+			int indexTest = std::distance(vertexArr.begin(), cariIndex(t));
+			nodeVertex *tempVert = new nodeVertex(t);
+			cout << "Node : " << t << " Index : " << "-" << " Ptr : "<< tempVert << endl;
+			cout << "Node : " << t << " Index : " << indexTest << " Ptr : "<< vertexPtrArr[indexTest] << endl;
 		}
 };
 
@@ -152,9 +157,11 @@ int main(int argc, char** argv) {
 	myGraph.test(1);
 	myGraph.test(2);
 	myGraph.addEdge(1,2);
+	myGraph.addEdge(1,3);
 	cout << "Vertex : " << myGraph.getVertex(3)->getName() << " Alamat : " << myGraph.getVertex(3) << endl;
 	myGraph.getVertices();
 	myGraph.inGraph(4);
+	myGraph.printAdjList();
 	
 	return 0;
 }
