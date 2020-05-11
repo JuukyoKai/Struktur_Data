@@ -97,31 +97,48 @@ class Graph{
 			
 			//cout << vertexPtrArr[indexFrom] << endl;
 		}
-		void getVertex(int vertKey){
-			if(cariIndex(vertKey) <= vertexArr.end()){
-				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Tidak Ditemukan" << endl;	
-			} else {
+		nodeVertex* getVertex(int vertKey){
+			cout << "Getting Vertex ...." << endl;
+			if(cariIndex(vertKey) != vertexArr.end()){
 				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Ditemukan" << endl;
+				return vertexPtrArr[std::distance(vertexArr.begin(), cariIndex(vertKey))];
+			} else {
+				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Tidak Ditemukan" << endl;	
 			}
 		}
 		
-		getVertices(){
+		void getVertices(){
 			vector<int>::iterator it;
 			for (it = vertexArr.begin(); it != vertexArr.end(); it++) { 
            		cout << *it << ' '; 
         	} 
+        	cout << "\n" << endl;
 		}
-		
-		
 		
 		void test(int t){
 			int indexTest = std::distance(vertexArr.begin(), cariIndex(t));
 			nodeVertex *tempVert = new nodeVertex(t);
-			cout << "Node : " << t << " Index : " << NULL << " Ptr : "<< tempVert << endl;
+			cout << "Node : " << t << " Index : " << "-" << " Ptr : "<< tempVert << endl;
 			cout << "Node : " << t << " Index : " << indexTest << " Ptr : "<< vertexPtrArr[indexTest] << endl;
 		}
-		void printEdge(){
+		void inGraph(int vertKey){
+			//cout << *(vertexArr.end()) << " : " << *cariIndex(vertKey);
+			if(cariIndex(vertKey) != vertexArr.end()){
+				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Ditemukan" << endl;
+			} else {
+				cout << "vertex yang anda cari adalah : " << vertKey << " Status : Tidak Ditemukan" << endl;	
+			}
+		}
+		void adjList(int ){
 			
+		}
+		void printAdjList(){
+			vector<int>::iterator it;
+			for (it = vertexArr.begin()+1; it != vertexArr.end(); it++) { 
+				cout << "\n Adjacency list of vertex " << (it-vertexArr.begin()) << "\n head "; 
+           		cout << *it << ' '; 
+        	} 
+        	cout << "\n" << endl;
 		}
 };
 
@@ -131,11 +148,13 @@ int main(int argc, char** argv) {
 	Graph myGraph;
 	myGraph.addVertex(1);
 	myGraph.addVertex(2);
+	myGraph.addVertex(3);
 	myGraph.test(1);
 	myGraph.test(2);
 	myGraph.addEdge(1,2);
-	myGraph.getVertex(4);
-	
+	cout << "Vertex : " << myGraph.getVertex(3)->getName() << " Alamat : " << myGraph.getVertex(3) << endl;
+	myGraph.getVertices();
+	myGraph.inGraph(4);
 	
 	return 0;
 }
